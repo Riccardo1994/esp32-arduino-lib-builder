@@ -3,7 +3,6 @@
 source ./tools/config.sh
 
 INSIGHTS_REPO_URL="https://github.com/espressif/esp-insights.git"
-TINYUSB_REPO_URL="https://github.com/hathach/tinyusb.git"
 
 #
 # CLONE/UPDATE ARDUINO
@@ -48,15 +47,4 @@ fi
 if [ $? -ne 0 ]; then exit 1; fi
 
 
-#
-# CLONE/UPDATE TINYUSB
-#
-echo "Updating TinyUSB..."
-if [ ! -d "$AR_COMPS/arduino_tinyusb/tinyusb" ]; then
-	git clone $TINYUSB_REPO_URL "$AR_COMPS/arduino_tinyusb/tinyusb"
-else
-	git -C "$AR_COMPS/arduino_tinyusb/tinyusb" fetch && \
-	git -C "$AR_COMPS/arduino_tinyusb/tinyusb" pull --ff-only
-fi
-if [ $? -ne 0 ]; then exit 1; fi
 
