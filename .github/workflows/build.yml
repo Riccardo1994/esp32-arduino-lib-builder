@@ -13,8 +13,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y git wget curl libssl-dev libncurses-dev flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache jq
-      - name: Remove esp-dl component (IDF version conflict)
-        run: rm -rf components/esp-dl
+      - name: Remove IDF5-only components not compatible with release/v4.4
+        run: |
+          rm -rf components/esp-dl
+          rm -rf components/esp32-camera
+          rm -rf components/esp_littlefs
+          rm -rf components/espressif__esp-dsp
       - name: Run build
         env:
           IDF_COMPONENT_MANAGER: "0"
