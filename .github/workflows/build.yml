@@ -20,7 +20,15 @@ jobs:
           chmod +x build.sh
           rm -rf components/arduino_tinyusb
           ./build.sh -A release/v2.x -I release/v4.4 -i v4.4.7 -t esp32s3
+      - name: Upload liblwip.a directly (fallback)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: liblwip-only
+          path: build/esp-idf/lwip/liblwip.a
+          retention-days: 7
       - name: Upload built SDK
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: esp32s3-sdk-lwip-fix
