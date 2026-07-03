@@ -1,0 +1,31 @@
+name: Build ESP32-S3 libs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout lib-builder
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git wget curl libssl-dev libncurses-dev flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache jq
+          sudo pip3 install --upgrade pip
+
+      - name: Run build
+        run: |
+          chmod +x build.sh
+          ./build.sh -I release/v4.4 -i v4.4.7 -t esp32s3 --no-copy
+
+      - name: Upload built SDK
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp32s3-sdk-lwip-fix
+          path: out/tools/sdk
+          retention-days: 7
