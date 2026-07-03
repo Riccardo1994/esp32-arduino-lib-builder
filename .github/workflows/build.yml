@@ -20,7 +20,7 @@ jobs:
       - name: Run build
         run: |
           chmod +x build.sh
-          ./build.sh -I release/v4.4 -i v4.4.7 -t esp32s3 --no-copy
+          ./build.sh -I release/v4.4 -i v4.4.7 -t esp32s3
 
       - name: Upload built SDK
         uses: actions/upload-artifact@v4
