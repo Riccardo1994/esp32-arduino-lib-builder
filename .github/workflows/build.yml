@@ -1,8 +1,6 @@
 name: Build ESP32-S3 libs
-
 on:
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -11,20 +9,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-
       - name: Install prerequisites
         run: |
           sudo apt-get update
           sudo apt-get install -y git wget curl libssl-dev libncurses-dev flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache jq
-
       - name: Remove esp-dl component (IDF version conflict)
         run: rm -rf components/esp-dl
-
       - name: Run build
+        env:
+          IDF_COMPONENT_MANAGER: "0"
         run: |
           chmod +x build.sh
           ./build.sh -A release/v2.x -I release/v4.4 -i v4.4.7 -t esp32s3
-
       - name: Upload built SDK
         uses: actions/upload-artifact@v4
         with:
