@@ -14,8 +14,9 @@ jobs:
 
       - name: Install prerequisites
         run: |
-          sudo apt-get update
-          sudo apt-get install -y git wget curl libssl-dev libncurses-dev flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache jq
+                sudo apt-get update
+                sudo apt-get install -y git wget curl libssl-dev libncurses-dev flex bison gperf python3 python3-venv cmake ninja-build ccache jq
+                python3 -m ensurepip --upgrade
 
       - name: Run build
         run: |
