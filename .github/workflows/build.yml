@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout lib-builder
         uses: actions/checkout@v4
@@ -14,9 +14,8 @@ jobs:
 
       - name: Install prerequisites
         run: |
-                sudo apt-get update
-                sudo apt-get install -y git wget curl libssl-dev libncurses-dev flex bison gperf python3 python3-venv cmake ninja-build ccache jq
-                python3 -m ensurepip --upgrade
+          sudo apt-get update
+          sudo apt-get install -y git wget curl libssl-dev libncurses-dev flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache jq
 
       - name: Run build
         run: |
