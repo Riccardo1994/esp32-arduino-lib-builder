@@ -18,10 +18,7 @@ jobs:
           IDF_COMPONENT_MANAGER: "0"
         run: |
           chmod +x build.sh
-          ./build.sh -A release/v2.x -I release/v4.4 -i v4.4.7 -t esp32s3 || true
-          rm -rf components/esp-dl components/esp32-camera components/esp_littlefs components/espressif__esp-dsp components/esp-rainmaker components/esp-sr components/esp-insights
-          . esp-idf/export.sh
-          ./build.sh -A release/v2.x -I release/v4.4 -i v4.4.7 -t esp32s3 -s
+          ./build.sh -A release/v2.x -I release/v4.4 -i v4.4.7 -t esp32s3
       - name: Upload built SDK
         uses: actions/upload-artifact@v4
         with:
